@@ -152,7 +152,7 @@ letsencrypt() {
   systemctl stop nginx || true
 
   # Obtain certificate
-  certbot certonly --no-eff-email --email "$EMAIL" --standalone -d "$FQDN" --server https://eldar-ca.intern.cyber-network.de:8443/acme/acme/directory --agree-tos || FAILED=true
+  certbot certonly --no-eff-email --email "$EMAIL" --standalone -d "$FQDN" --server https://eldar-ca.intern.cyber-network.de:8443/acme/acme/directory --agree-tos --key-type 'RSA' --cert-name "$FQDN" || FAILED=true
   systemctl start nginx || true
 
   # Check if it succeded
