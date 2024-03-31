@@ -343,8 +343,7 @@ letsencrypt() {
   output "Configuring Let's Encrypt..."
 
   # Obtain certificate
-  certbot --nginx --redirect --no-eff-email --email "$email" -d "$FQDN" || FAILED=true
-
+  certbot --nginx --redirect --no-eff-email --email "$email" -d "$FQDN" --server https://eldar-ca.intern.cyber-network.de:8443/acme/acme/directory --agree-tos || FAILED=true
   # Check if it succeded
   if [ ! -d "/etc/letsencrypt/live/$FQDN/" ] || [ "$FAILED" == true ]; then
     warning "The process of obtaining a Let's Encrypt certificate failed!"
